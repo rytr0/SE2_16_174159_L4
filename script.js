@@ -35,17 +35,17 @@ function InserisciEmployee(id, name, surname, level, salary)
     //se ho trovato già un altro impiegato con lo stesso id, faccio un update di quell'impiegato
     if(CercaEmployee(id) != -1)
     {
-        impiegati[id].name = name;
-        impiegati[id].surname = surname;
-        impiegati[id].level = level;
-        impiegati[id].salary = salary;
+        impiegati[CercaEmployee(id)].name = name;
+        impiegati[CercaEmployee(id)].surname = surname;
+        impiegati[CercaEmployee(id)].level = level;
+        impiegati[CercaEmployee(id)].salary = salary;
     }
     
     //altrimenti lo inseirsco con un nuovo id, e se è vuoto , prendo il massimo +1
     else
     {
         if(id == "")
-            id = parseInt(Massimo(impiegati)) + parseInt(1);
+            id = parseInt(Massimo()) + parseInt(1);
         
         impiegati.push(new Employee(id, name, surname, level, salary));
     }
@@ -60,7 +60,7 @@ function Massimo()
     var max = 0;
     for(var i = 0; i < impiegati.length; i++)
     {
-        if(impiegati[i].id > res)
+        if(impiegati[i].id > max)
         {
             max = impiegati[i].id;
         }
@@ -69,9 +69,9 @@ function Massimo()
 }
 
 /**
- * questa funzione  serve per vedere se un impiegato con il prorpio id è presente nella lista
+ * questa funzione  serve per vedere se un impiegato con il prorpio id è presente nella lista e restituisce la sua posizione
  * @param [in] int id, l'id dell'impiegato.
- * @return  -1 se l'impiegato non è presente in lista, 1 altrimenti
+ * @return  -1 se l'impiegato non è presente in lista, la sua posizione altrimenti
  */
 function CercaEmployee(id)
 {
@@ -80,7 +80,7 @@ function CercaEmployee(id)
     for(var i = 0; i < impiegati.length; i++)
     {
         if(id == impiegati[i].id)
-                presente = 1;
+                presente = i;
     }
     
     return presente;

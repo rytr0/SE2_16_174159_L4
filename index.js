@@ -54,7 +54,7 @@ app.post('/CercaId', function(req, res)
         //se ho premuto Search
         else if(req.body.CercaImpiegato != undefined)
         {
-            var pos = req.body.IdIns;
+            var pos = back.CercaEmployee(req.body.IdIns);
         
             bind.toFile('index.tpl', 
             {
